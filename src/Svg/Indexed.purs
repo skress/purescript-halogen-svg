@@ -87,6 +87,7 @@ type SVGline = MarkerAttributes (GlobalAttributes
   , y2 :: Number
   , transform :: String
   , strokeWidth :: Number
+  , strokeLinecap :: String
   ))
 
 type SVGtext = GlobalAttributes
