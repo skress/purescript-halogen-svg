@@ -309,6 +309,12 @@ markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnit
 strokeWidth :: forall r i. Number -> IProp (strokeWidth :: Number | r) i
 strokeWidth = attr (AttrName "stroke-width") <<< show
 
+markerStart :: forall r i. String -> IProp (markerStart :: String | r) i
+markerStart = attr (AttrName "marker-start")
+
+markerMid :: forall r i. String -> IProp (markerMid :: String | r) i
+markerMid = attr (AttrName "marker-mid")
+
 markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
 markerEnd = attr (AttrName "marker-end")
 
