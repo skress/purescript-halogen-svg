@@ -14,10 +14,22 @@ import Unsafe.Coerce (unsafeCoerce)
 data Color = RGB Int Int Int
            | RGBA Int Int Int Number
 
-printColor :: Maybe Color -> String
-printColor (Just (RGB r' g' b')) = "rgb(" <> (joinWith "," $ map show [r', g', b']) <> ")"
-printColor (Just (RGBA r' g' b' o')) = "rgba(" <> (joinWith "," $ map show [r', g', b']) <> "," <> show o' <> ")"
-printColor Nothing = "None"
+printColor :: Color -> String
+printColor (RGB r' g' b') = "rgb(" <> (joinWith "," $ map show [r', g', b']) <> ")"
+printColor (RGBA r' g' b' o') = "rgba(" <> (joinWith "," $ map show [r', g', b']) <> "," <> show o' <> ")"
+
+data PaintServer
+  = PaintNone
+  | PaintColor Color
+  | Pattern String
+  | Gradient String
+  | Hatch String
+printPaintServer :: PaintServer -> String
+printPaintServer PaintNone = "None"
+printPaintServer (PaintColor color) = printColor color
+printPaintServer (Pattern pattern) = pattern
+printPaintServer (Gradient gradient) = gradient
+printPaintServer (Hatch hatch) = hatch
 
 data Transform
   = Matrix Number Number Number Number Number Number
@@ -264,14 +276,14 @@ x2 = attr (AttrName "x2") <<< show
 y2 :: forall r i. Number -> IProp (y2 :: Number | r) i
 y2 = attr (AttrName "y2") <<< show
 
-stroke :: forall r i. Maybe Color -> IProp (stroke :: String | r) i
-stroke = attr (AttrName "stroke") <<< printColor
+stroke :: forall r i. PaintServer -> IProp (stroke :: String | r) i
+stroke = attr (AttrName "stroke") <<< printPaintServer
 
 strokeLinecap :: forall r i. StrokeLinecap -> IProp (strokeLinecap :: String | r) i
 strokeLinecap = attr (AttrName "stroke-linecap") <<< printStrokeLinecap
 
-fill :: forall r i. Maybe Color -> IProp (fill :: String | r) i
-fill = attr (AttrName "fill") <<< printColor
+fill :: forall r i. PaintServer -> IProp (fill :: String | r) i
+fill = attr (AttrName "fill") <<< printPaintServer
 
 transform :: forall r i . Array Transform -> IProp (transform :: String | r) i
 transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
