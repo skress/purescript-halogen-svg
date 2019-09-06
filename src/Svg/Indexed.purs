@@ -116,6 +116,19 @@ type SVGmarker = (PresentationAttributes (StyleAttributes (CoreAttributes
   , markerUnits :: String
   ))))
 
+type SVGPattern = GlobalAttributes
+  ( height :: Number
+  , width :: Number
+  , href :: String
+  , patternContentUnits :: String
+  , patternTransform :: String
+  , patternUnits :: String
+  , preserveAspectRatio :: String
+  , viewBox :: String
+  , x :: Number
+  , y :: Number
+  )
+
 --------------------------------------------------------------------------------
 
 type AnimationAttributes r = GlobalAttributes

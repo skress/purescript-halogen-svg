@@ -201,6 +201,13 @@ printStrokeLinecap Butt = "butt"
 printStrokeLinecap Round = "round"
 printStrokeLinecap Square = "square"
 
+data PatternUnits
+  = PatternUnitsUserSpaceOnUse
+  | ObjectBoundingBox
+printPatternUnits :: PatternUnits -> String
+printPatternUnits PatternUnitsUserSpaceOnUse = "userSpaceOnUse"
+printPatternUnits ObjectBoundingBox = "objectBoundingBox"
+
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
@@ -317,6 +324,18 @@ markerMid = attr (AttrName "marker-mid")
 
 markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
 markerEnd = attr (AttrName "marker-end")
+
+href :: forall r i. String -> IProp (href :: String | r) i
+href = attr (AttrName "href")
+
+patternContentUnits :: forall r i. PatternUnits -> IProp (patternContentUnits :: String | r) i
+patternContentUnits = attr (AttrName "patternContentUnits") <<< printPatternUnits
+
+patternTransform :: forall r i. Transform -> IProp (patternTransform :: String | r) i
+patternTransform = attr (AttrName "patternTransform") <<< printTransform
+
+patternUnits :: forall r i. PatternUnits -> IProp (patternUnits :: String | r) i
+patternUnits = attr (AttrName "patternUnits") <<< printPatternUnits
 
 --------------------------------------------------------------------------------
 
