@@ -2,12 +2,11 @@ module Svg.Elements.Keyed where
 
 import Prelude
 
-import Core as Core
-
 import Data.Tuple (Tuple)
 import Halogen.HTML.Core (ElemName(ElemName), HTML)
 import Halogen.HTML.Elements (keyedNS)
 import Halogen.HTML.Properties (IProp)
+import Svg.Core as Core
 import Svg.Indexed as I
 
 -- Not exported by Halogen.HTML.Elements.Keyed

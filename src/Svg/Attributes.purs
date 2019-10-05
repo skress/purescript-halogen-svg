@@ -3,11 +3,11 @@ module Svg.Attributes where
 
 import Prelude
 
-import Core as Core
 import Data.Maybe (Maybe(..), maybe)
 import Data.String (joinWith)
 import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace))
 import Halogen.HTML.Properties (IProp, attrNS)
+import Svg.Core as Core
 import Svg.Types (Align, printAlign, MeetOrSlice, printMeetOrSlice, PaintServer, StrokeLinecap, Transform, printTransform, D, printD, TextAnchor, printTextAnchor, FontSize, Baseline, printBaseline, Orient, printOrient, MarkerUnit, printMarkerUnit, PatternUnits, Point)
 import Unsafe.Coerce (unsafeCoerce)
 
